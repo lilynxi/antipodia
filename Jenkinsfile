@@ -21,8 +21,8 @@ node {
     env.SHORT_NAME = env.SHORT_NAME.substring(0, 24)
   }
 
-  // Docker image that is built for testing
-  env.IMAGE = "testimage-" + env.BUILD_TAG
+  // Docker image that is built
+  env.IMAGE = "antipodia-" + env.BUILD_TAG
   env.JENKINS_BLUE_URL = "${env.JENKINS_URL}/blue/organizations/jenkins/amazeelabs%2Fantipodia/detail/${env.BRANCH_NAME}/${BUILD_ID}/pipeline"
 
   // OpenShift Defaults
