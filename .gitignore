@@ -1,0 +1,6 @@
+# Generated stuff
+coverage
+dlls
+build
+node_modules
+npm-debug.log

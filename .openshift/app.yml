@@ -1,0 +1,108 @@
+apiVersion: v1
+kind: Template
+metadata:
+  creationTimestamp: null
+  name: antipodia
+parameters:
+  - name: TAG
+    description: Which docker image tag should be deployed
+    required: true
+  - name: NAME
+    description: Name of the objects to create
+    required: true
+  - name: SHORT_NAME
+    description: Shorter name of the objects to create, can be max 24 chars
+    required: true
+  - name: PROJECT
+    description: Which project this is
+    required: true
+  - name: OPENSHIFT_PROJECT
+    description: Which openshift project this is
+    required: true
+objects:
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: ${NAME}
+    name: ${NAME}
+  spec:
+    replicas: 1
+    selector:
+      app: ${NAME}
+      deploymentconfig: ${NAME}
+    strategy:
+      resources: {}
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: ${NAME}
+          deploymentconfig: ${NAME}
+      spec:
+        containers:
+        - image: ${OPENSHIFT_PROJECT}/${PROJECT}:${TAG}
+          name: nodejs
+          env:
+          - name: SSR_DISABLED
+            value: "false"
+          ports:
+          - containerPort: 3000
+            protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: 3000
+            initialDelaySeconds: 15
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 100m
+              memory: 200Mi
+            requests:
+              cpu: 50m
+              memory: 120Mi
+    test: false
+    triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - nodejs
+        from:
+          kind: ImageStreamTag
+          name: ${PROJECT}:${TAG}
+      type: ImageChange   
+  status: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: ${NAME}
+    name: ${SHORT_NAME}
+  spec:
+    ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 3000
+    selector:
+      app: ${NAME}
+      deploymentconfig: ${NAME}
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Route
+  metadata:
+    creationTimestamp: null
+    labels:
+      app: ${NAME}
+    name: ${NAME}
+  spec:
+    host: ${PROJECT}.${TAG}.appuio.amazee.io
+    port:
+      targetPort: http
+    to:
+      kind: Service
+      name: ${SHORT_NAME}
