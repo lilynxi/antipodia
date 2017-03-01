@@ -2,11 +2,12 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
+import App from './app';
 
 const AntipodePage = (): React.Element<any> => (
   <div>
     <Helmet title="Hello world!" />
-    <div>Hello world!</div>
+    <App />
   </div>
 );
 
