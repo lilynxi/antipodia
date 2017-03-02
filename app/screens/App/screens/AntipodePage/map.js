@@ -3,6 +3,9 @@
 import React, { Component } from 'react';
 import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { connect } from 'react-redux';
+import { addMarker } from '../../../../shared/state/actions/actions';
+import uuid from 'uuid';
 
 
 
@@ -47,67 +50,41 @@ const calcLatLng = (newPosition) => {
 
 class Map extends Component {
 
-  state = {
-    markers: [{
-      position: {
-        lat: -25,
-        lng: 131,
-      },
-      key: `Initial Marker`,
-      defaultAnimation: 2,
-    }],
-    antipodeMarkers: [{
-      position: {
-        lat: 25,
-        lng: -49,
-      },
-      key: `Initial AntipodeMarker`,
-      defaultAnimation: 2,
-    }]
-  };
-
-
 
   handleMapLoad = (map) => {
     this._mapComponent = map;
     if (map) { console.log("zoom",map.getZoom()); }
   }
 
+
   handleMapClick = (event) => {
+    const {dispatch} = this.props;
+
     const newPosition = {
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
     };
 
+    const newMarker = {
+      position: newPosition,
+      defaultAnimation: 2,
+      key: uuid.v4(),
+    }
+
     const newAntipodePosition = calcLatLng(newPosition);
 
-    const nextMarkers = [
-      ...this.state.markers,
-      {
-        position: newPosition,
-        defaultAnimation: 2,
-        key: Date.now(), // Add a key property for: http://fb.me/react-warning-keys
-      },
-    ];
-    const nextAntipodeMarkers = [
-      ...this.state.antipodeMarkers,
-      {
-        position: newAntipodePosition,
-        defaultAnimation: 2,
-        key: Date.now()+10,
-      }
-    ]
-
-    this.setState({
-      markers: nextMarkers,
-      antipodeMarkers: nextAntipodeMarkers,
-    });
-
-    console.log("nextMarkers",nextMarkers);
-    console.log("nextAntipodeMarkers",nextAntipodeMarkers);
+    dispatch(addMarker(newMarker));
   }
 
+
+
   render() {
+    const {dispatch, state} = this.props;
+
+    if (!state) {
+			return null;
+		}
+
     return (
       <div style={{ height: `300px`, maxWidth:`400px` }}>
         <GoogleMapWrapper
@@ -115,8 +92,8 @@ class Map extends Component {
           loadingElement={<div>Loading</div>}
           containerElement={<div style={{ height: `100%` }} />}
           mapElement={<div style={{ height: `100%` }} />}
-          initialCenter={this.props.initialCenter}
-          markers={this.state.markers}
+          initialCenter={state.markers[0].position}
+          markers={state.markers}
           onMapLoad={this.handleMapLoad}
           onMapClick={this.handleMapClick}
         />
@@ -125,5 +102,23 @@ class Map extends Component {
   }
 }
 
+const withStateFromRedux = connect(state => ({
+  state
+}));
 
-export default Map;
+const MapWithStateFromRedux = withStateFromRedux(Map);
+
+export default MapWithStateFromRedux;
+
+// export default connect(state => ({
+//   state
+// }))(Map);
+
+
+
+
+// const EnhancedCounter = compose(
+//   withState('counter1', 'setCounter', 0),
+//   withReducer('counter2', 'dispatch', counterReducer, 0),
+//   withRouter,
+// )(Counter);
