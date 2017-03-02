@@ -4,49 +4,10 @@ import React, { Component } from 'react';
 import Map from './map';
 import AddressDisplay from './addressDisplay';
 import { connect } from 'react-redux';
-import { addMarker } from '../../../../shared/state/actions/actions';
-import uuid from 'uuid';
+import { addMarker } from 'state/actions/actions';
+import { createAntipodeMarkers, calculateAntipodePosition, newMarkerObject } from 'locationUtils';
 
 
-
-
-
-// calculate the position of an antipode
-const calculateAntipodePosition = (podeMarker) => {
-  const antipodeLat = -podeMarker.lat;
-  let antipodeLng;
-
-  if(podeMarker.lng<=0){
-    antipodeLng = 180+podeMarker.lng;
-  } else {
-    antipodeLng = -(180-podeMarker.lng);
-  }
-
-  return {
-    lat: antipodeLat,
-    lng: antipodeLng,
-  }
-}
-
-// create antipode markers array
-const createAntipodeMarkers = (podeMarkers) => {
-  return (
-    podeMarkers.map(function(marker){
-      const antipodePosition = calculateAntipodePosition(marker.position);
-      return newMarkerObject(antipodePosition);
-    })
-  )
-}
-
-// create a marker object
-export const newMarkerObject = (position, address="default name", defaultAnimation=0) => {
-  return {
-    position,
-    address,
-    defaultAnimation,
-    key: uuid.v4()
-  }
-}
 
 
 
@@ -77,6 +38,7 @@ class App extends Component {
 
     const antipodeMarkers = createAntipodeMarkers(state.markers);
     const antipodeCenter = calculateAntipodePosition(state.center);
+    //console.log(state.center);
 
     if (!state) {
     	return null;
@@ -86,11 +48,11 @@ class App extends Component {
       <div>
         <div style={{ float:`left`, width:`420px` }}>
           <Map markers={state.markers} center={state.center} handleClick={this.handlePodeClick}/>
-          <AddressDisplay />
+          <AddressDisplay type="pode"/>
         </div>
         <div style={{ float:`left`, width:`420px` }}>
           <Map markers={antipodeMarkers} center={antipodeCenter} handleClick={this.handleAntipodeClick}/>
-          <AddressDisplay />
+          <AddressDisplay type="antipode"/>
         </div>
       </div>
     )

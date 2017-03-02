@@ -2,24 +2,27 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addMarker } from '../../../../shared/state/actions/actions';
-
-
+import { addMarker } from 'state/actions/actions';
 
 
 class AddressDisplay extends Component {
-
-
-
   render() {
-    const {dispatch, state} = this.props;
+    const {state} = this.props;
+    const markers = Object.values(state.markers);
+    const marker = markers[markers.length - 1];
+
+
     return (
       <div>
-        {state.markers[state.markers.length-1].address}
+        {this.props.type === "pode" && marker.address.pode }
+        {this.props.type === "antipode" && marker.address.antipode }
       </div>
     )
   }
 }
+
+// {marker.address && marker.address.pode }
+// {marker.address && marker.address.antipode }
 
 
 const AddressDisplayWithStateFromRedux = connect(state => ({

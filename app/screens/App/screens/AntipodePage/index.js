@@ -4,16 +4,24 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import MapWrapper from './mapWrapper';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import defaultExport from '../../../../shared/state/reducers/reducers';
+import { createStore, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import reducers from '../../../../shared/state/reducers/reducers';
+import rootSaga from 'state/sagas';
 
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
-  defaultExport,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  reducers,
+  compose(
+    applyMiddleware(sagaMiddleware),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  ),
 );
 
-
+// then run the saga
+sagaMiddleware.run(rootSaga);
 
 const AntipodePage = (): React.Element<any> => (
   <div>

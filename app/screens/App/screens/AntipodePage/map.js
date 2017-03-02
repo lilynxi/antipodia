@@ -3,8 +3,6 @@
 import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
-
-
 class Map extends Component {
 
   handleMapLoad = (map) => {
@@ -49,7 +47,7 @@ const GoogleMapWrapper = withGoogleMap ( props =>  (
     center={props.center}
     onClick={props.onMapClick}
   >
-  {props.markers.map(marker => (
+  {Object.values(props.markers).map(marker => (
     <Marker
       {...marker}
     />

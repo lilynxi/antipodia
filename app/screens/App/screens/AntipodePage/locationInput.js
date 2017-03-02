@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId } from 'react-places-autocomplete';
 import { connect } from 'react-redux';
-import { newMarkerObject } from './app';
-import { addMarker } from '../../../../shared/state/actions/actions';
+import { newMarkerObject } from 'locationUtils';
+import { addMarker } from 'state/actions/actions';
 
 
 
@@ -19,7 +19,7 @@ class LocationInput extends Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault()
-    const { address } = this.state
+    const { address } = this.state;
 
     geocodeByAddress(address,  (err, { lat, lng }) => {
       if (err) { console.log('Oh no!', err) }

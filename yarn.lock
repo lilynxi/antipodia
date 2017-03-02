@@ -4917,6 +4917,10 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
+redux-saga@^0.14.3:
+  version "0.14.3"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.14.3.tgz#28cd2c5b49cf780a1de25875765724150c630513"
+
 redux@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
@@ -5079,6 +5083,10 @@ restore-cursor@^1.0.1:
   dependencies:
     exit-hook "^1.0.0"
     onetime "^1.0.0"
+
+reverse-geocode@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/reverse-geocode/-/reverse-geocode-1.0.1.tgz#651e3770cb87850754b6b539bf85b14a44feb207"
 
 right-align@^0.1.1:
   version "0.1.3"
