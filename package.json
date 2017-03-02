@@ -25,6 +25,7 @@
     "react-google-maps": "beta",
     "react-helmet": "^4.0.0",
     "react-hot-loader": "^3.0.0-beta",
+    "react-places-autocomplete": "^3.0.0",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.8",

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import App from './app';
+import MapWrapper from './mapWrapper';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import defaultExport from '../../../../shared/state/reducers/reducers';
@@ -19,7 +19,10 @@ const AntipodePage = (): React.Element<any> => (
   <div>
     <Helmet title="Hello world!" />
     <Provider store={store}>
-      <App />
+      <MapWrapper
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo9HjDmEGGRE3nOk-fWwP2YmpfF-JcWqM&libraries=places"
+        loadingElement={<div>Loading</div>}
+      />
     </Provider>
   </div>
 );

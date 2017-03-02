@@ -38,7 +38,7 @@ const createAntipodeMarkers = (podeMarkers) => {
 }
 
 // create a marker object
-const newMarkerObject = (position, defaultAnimation=0) => {
+export const newMarkerObject = (position, defaultAnimation=0) => {
   return {
     position,
     defaultAnimation,
@@ -74,6 +74,7 @@ class App extends Component {
     const {dispatch, state} = this.props;
 
     const antipodeMarkers = createAntipodeMarkers(state.markers);
+    const antipodeCenter = calculateAntipodePosition(state.center);
 
     if (!state) {
     	return null;
@@ -81,8 +82,8 @@ class App extends Component {
 
     return (
       <div>
-        <Map markers={state.markers} initCenter={state.markers[0].position} handleClick={this.handlePodeClick}/>
-        <Map markers={antipodeMarkers} initCenter={antipodeMarkers[0].position} handleClick={this.handleAntipodeClick}/>
+        <Map markers={state.markers} center={state.center} handleClick={this.handlePodeClick}/>
+        <Map markers={antipodeMarkers} center={antipodeCenter} handleClick={this.handleAntipodeClick}/>
       </div>
     )
   }
