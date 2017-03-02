@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import Map from './map';
+import AddressDisplay from './addressDisplay';
 import { connect } from 'react-redux';
 import { addMarker } from '../../../../shared/state/actions/actions';
 import uuid from 'uuid';
@@ -38,9 +39,10 @@ const createAntipodeMarkers = (podeMarkers) => {
 }
 
 // create a marker object
-export const newMarkerObject = (position, defaultAnimation=0) => {
+export const newMarkerObject = (position, address="default name", defaultAnimation=0) => {
   return {
     position,
+    address,
     defaultAnimation,
     key: uuid.v4()
   }
@@ -82,8 +84,14 @@ class App extends Component {
 
     return (
       <div>
-        <Map markers={state.markers} center={state.center} handleClick={this.handlePodeClick}/>
-        <Map markers={antipodeMarkers} center={antipodeCenter} handleClick={this.handleAntipodeClick}/>
+        <div style={{ float:`left`, width:`420px` }}>
+          <Map markers={state.markers} center={state.center} handleClick={this.handlePodeClick}/>
+          <AddressDisplay />
+        </div>
+        <div style={{ float:`left`, width:`420px` }}>
+          <Map markers={antipodeMarkers} center={antipodeCenter} handleClick={this.handleAntipodeClick}/>
+          <AddressDisplay />
+        </div>
       </div>
     )
   }

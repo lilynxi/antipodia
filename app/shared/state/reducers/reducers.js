@@ -19,6 +19,7 @@ const initialState = {
   markers: [
     {
       position: initialCenter,
+      address: "initial location",
       defaultAnimation: 0,
       key: uuid.v4(),
     }
