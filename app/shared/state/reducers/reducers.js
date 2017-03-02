@@ -15,17 +15,15 @@ const initialState = {
         lat: -25,
         lng: 131,
       },
-      defaultAnimation: 2,
+      defaultAnimation: 0,
       key: uuid.v4(),
     }
   ]
 };
 
 export default (state = initialState, action) => {
-  //console.log(state);
   switch(action.type) {
     case ADD_MARKER:
-    //console.log("new marker",action.marker);
       return {
         markers: [
           ...state.markers,
@@ -35,5 +33,4 @@ export default (state = initialState, action) => {
     default:
       return state
   }
-
 }

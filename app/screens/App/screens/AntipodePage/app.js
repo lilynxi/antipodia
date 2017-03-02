@@ -8,59 +8,72 @@ import uuid from 'uuid';
 
 
 
-//
-// calculate antipode lat & lng
-//
-// const calcLatLng = (newPosition) => {
-//
-//   const antipodeLat = -newPosition.lat;
-//   let antipodeLng;
-//
-//   if(newPosition.lng<=0){
-//     antipodeLng = 180+newPosition.lng;
-//   } else {
-//     antipodeLng = -(180-newPosition.lng);
-//   }
-//   return {
-//     lat: antipodeLat,
-//     lng: antipodeLng,
-//   }
-// }
 
 
+// calculate the position of an antipode
+const calculateAntipodePosition = (podeMarker) => {
+  const antipodeLat = -podeMarker.lat;
+  let antipodeLng;
 
-  // handleMapClick = (event) => {
-  //   const {dispatch} = this.props;
-  //
-  //   const newPosition = {
-  //     lat: event.latLng.lat(),
-  //     lng: event.latLng.lng(),
-  //   };
-  //
-  //   const newMarker = {
-  //     position: newPosition,
-  //     defaultAnimation: 2,
-  //     key: uuid.v4(),
-  //   }
-  //
-  //   const newAntipodePosition = calcLatLng(newPosition);
-  //
-  //   dispatch(addMarker(newMarker));
-  // }
+  if(podeMarker.lng<=0){
+    antipodeLng = 180+podeMarker.lng;
+  } else {
+    antipodeLng = -(180-podeMarker.lng);
+  }
 
+  return {
+    lat: antipodeLat,
+    lng: antipodeLng,
+  }
+}
 
+// create antipode markers array
+const createAntipodeMarkers = (podeMarkers) => {
+  return (
+    podeMarkers.map(function(marker){
+      const antipodePosition = calculateAntipodePosition(marker.position);
+      return newMarkerObject(antipodePosition);
+    })
+  )
+}
+
+// create a marker object
+const newMarkerObject = (position, defaultAnimation=0) => {
+  return {
+    position,
+    defaultAnimation,
+    key: uuid.v4()
+  }
+}
 
 
 
 
 class App extends Component {
 
-  handleClick = () => {
-    console.log('click');
+  handlePodeClick = (latlng) => {
+    const newPosition = {
+      lat: latlng.lat,
+      lng: latlng.lng,
+    };
+    const newMarker = newMarkerObject(newPosition);
+
+    this.props.dispatch(addMarker(newMarker));
   }
+
+
+  handleAntipodeClick = (latlng) => {
+    const newPosition = calculateAntipodePosition(latlng);
+    const newMarker = newMarkerObject(newPosition);
+
+    this.props.dispatch(addMarker(newMarker));
+  }
+
 
   render() {
     const {dispatch, state} = this.props;
+
+    const antipodeMarkers = createAntipodeMarkers(state.markers);
 
     if (!state) {
     	return null;
@@ -68,20 +81,13 @@ class App extends Component {
 
     return (
       <div>
-        <Map markers={state.markers} initCenter={state.markers[0].position} handleClick={this.handleClick}/>
-        <Map markers={state.markers} initCenter={state.markers[0].position}/>
+        <Map markers={state.markers} initCenter={state.markers[0].position} handleClick={this.handlePodeClick}/>
+        <Map markers={antipodeMarkers} initCenter={antipodeMarkers[0].position} handleClick={this.handleAntipodeClick}/>
       </div>
     )
   }
 }
 
-
-
-// const setMarker = (lat, lon) => ...;
-// const getMarker = () => [lat, lon];
-// const setMarker = () => originalSetMarker(inverse(lat), inverse(lon))
-
-// export default App;
 
 
 const AppWithStateFromRedux = connect(state => ({

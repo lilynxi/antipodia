@@ -13,10 +13,13 @@ class Map extends Component {
     if (map) { console.log("zoom",map.getZoom()); }
   }
 
-  onMapClick = () => {
-    //console.log("aset",this.props.handleClick);
-    // koordinaten rausholen
-    this.props.handleClick();
+  onMapClick = (event) => {
+    const latlng = {
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    }
+
+    this.props.handleClick(latlng);
   }
 
   render() {
@@ -58,15 +61,6 @@ const GoogleMapWrapper = withScriptjs(withGoogleMap ( props =>  (
 )));
 
 
-
-
-
-
-// onMapClick={this.handleMapClick}
-
-// export default connect(state => ({
-//   state
-// }))(Map);
 
 
 
