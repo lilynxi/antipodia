@@ -41,9 +41,6 @@ export default function* reverseGeocodingSaga() {
       // Swallow fetch errors.
     }
 
-    // const tempMarker = newMarkerObject(action.marker.position);
-    // yield put(addMarker(tempMarker));
-
     yield put(addMarkerAddress(action.marker.key, pode, antipode));
   }
 }

@@ -17,7 +17,7 @@ class Location extends Component {
     return (
       <div style={{ float:`left`, width:`420px` }}>
         <Map markers={this.props.markers} center={this.props.center} handleClickLocation={this.handleClick}/>
-        <Display type={this.props.type} markers={this.props.markers}/>
+        <Display type={this.props.type} markers={this.props.markers} address={this.props.address} />
       </div>
     )
   }

@@ -18,9 +18,8 @@ export const getAntipodePosition = podeMarker => {
   }
 }
 
-// create antipode markers array
+// create antipode markers object
 export const createAntipodeMarkers = podeMarkers => {
-  //console.log("podeMarkers",podeMarkers);
   const newPodeMarkers = {};
   Object.values(podeMarkers).forEach(function(marker){
     const antipodePosition = getAntipodePosition(marker.position);

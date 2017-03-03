@@ -27,14 +27,14 @@ class App extends Component {
 
   render() {
     const {state} = this.props;
+    const podeAdress = Object.values(state.markers)[Object.values(state.markers).length-1].address.pode;
+    const antipodeAdress = Object.values(state.markers)[Object.values(state.markers).length-1].address.antipode;
 
     return (
       <div>
         <Search />
-        <Location type="pode" markers={state.markers} center={state.center} handleClickApp={this.handlePodeClick}/>
-        {console.log('markers', state.markers)}
-        {console.log('output', createAntipodeMarkers(state.markers))}
-        <Location type="antipode" markers={createAntipodeMarkers(state.markers)} center={getAntipodePosition(state.center)} handleClickApp={this.handleAntipodeClick}/>
+        <Location type="pode" markers={state.markers} center={state.center} address={podeAdress} handleClickApp={this.handlePodeClick}/>
+        <Location type="antipode" markers={createAntipodeMarkers(state.markers)} center={getAntipodePosition(state.center)} address={antipodeAdress} handleClickApp={this.handleAntipodeClick}/>
       </div>
     )
   }
