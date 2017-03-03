@@ -5,6 +5,19 @@ import PlacesAutocomplete, { geocodeByAddress, geocodeByPlaceId } from 'react-pl
 import { connect } from 'react-redux';
 import { newMarkerObject } from 'locationUtils';
 import { addMarker } from 'state/actions/actions';
+import styled from 'styled-components';
+
+const Form = styled.form`
+  input {
+    background: #fff;
+    width: 95%;
+    padding: 1rem;
+    border: none;
+  }
+`
+
+
+
 
 
 
@@ -36,13 +49,13 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleFormSubmit}>
+        <Form onSubmit={this.handleFormSubmit}>
           <PlacesAutocomplete
             value={this.state.address}
             onChange={this.onChange}
           />
           <button type="submit">Submit</button>
-        </form>
+        </Form>
       </div>
     )
   }

@@ -62,13 +62,30 @@ export default (state = initialState, action) => {
       };
 
     case ADD_WEATHERDATA:
+    //console.log(action.weather.pode);
+    //console.log(action.weather.pode.weather[0].description);
+    // T(°C) = (T(°F) - 32) / 1.8
+    // const podeWeatherDesc = action.weather.pode.weather[0].description;
+    const podeWeather = action.weather.pode.main.temp - 273.15;
+    const antipodeWeather = action.weather.antipode.main.temp - 273.15;
+    //console.log(podeWeather);
+    // console.log(antipodeWeather);
       return {
         ...state,
         markers: {
           ...state.markers,
           [action.key]: {
             ...state.markers[action.key],
-            weather: action.weather,
+            weather: {
+              pode: {
+                desc: action.weather.pode.weather[0].description,
+                temp: podeWeather,
+              },
+              antipode: {
+                desc: action.weather.antipode.weather[0].description,
+                temp: antipodeWeather,
+              }
+            },
           },
         }
       };

@@ -27,7 +27,7 @@ class Location extends Component {
       <StyledLocation>
         <Map markers={this.props.markers} center={this.props.center} handleClickLocation={this.handleClick}/>
         <Display type={this.props.type} markers={this.props.markers} address={this.props.address} />
-        <Weather />
+        <Weather weather={this.props.weather}/>
         <Image address={this.props.address} />
       </StyledLocation>
     )
