@@ -4,7 +4,7 @@
  */
 
 
-import { ADD_MARKER, ADD_MARKER_ADDRESS } from '../actions/actions';
+import { ADD_MARKER, ADD_MARKER_ADDRESS, ADD_WEATHERDATA } from '../actions/actions';
 import update from 'react-addons-update';
 import uuid from 'uuid';
 
@@ -22,6 +22,14 @@ const initialState = {
       address: {
         pode: "pode location",
         antipode: "antipode location",
+      },
+      weather: {
+        pode: undefined,
+        antipode: undefined,
+      },
+      streetview: {
+        pode: undefined,
+        antipode: undefined,
       },
       defaultAnimation: 0,
       key: initialKey,
@@ -51,6 +59,18 @@ export default (state = initialState, action) => {
             address: action.address,
           },
         },
+      };
+
+    case ADD_WEATHERDATA:
+      return {
+        ...state,
+        markers: {
+          ...state.markers,
+          [action.key]: {
+            ...state.markers[action.key],
+            weather: action.weather,
+          },
+        }
       };
 
     default:

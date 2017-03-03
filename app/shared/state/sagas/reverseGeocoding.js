@@ -2,7 +2,7 @@
 
 import { take, call, put } from 'redux-saga/effects'
 import { ADD_MARKER, addMarkerAddress } from 'state/actions/actions';
-import { getAntipodePosition, newMarkerObject } from 'App/shared/locationUtils';
+import { getAntipodePosition } from 'App/shared/locationUtils';
 
 const fetchReverseGeocodeForMarker = async (position) => {
   return new Promise((resolve, reject) => {
