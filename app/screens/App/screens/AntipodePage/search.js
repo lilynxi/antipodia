@@ -8,12 +8,12 @@ import { addMarker } from 'state/actions/actions';
 import styled from 'styled-components';
 
 const Form = styled.form`
-  input {
-    background: #fff;
-    width: 95%;
-    padding: 1rem;
-    border: none;
-  }
+  // input {
+  //   background: #fff;
+  //   width: 100%;
+  //   padding: 1rem;
+  //   border: none;
+  // }
 `
 
 
