@@ -9,7 +9,7 @@ import { addMarker } from 'state/actions/actions';
 
 
 
-class LocationInput extends Component {
+class Search extends Component {
 
   constructor(props) {
     super(props)
@@ -24,13 +24,10 @@ class LocationInput extends Component {
     geocodeByAddress(address,  (err, { lat, lng }) => {
       if (err) { console.log('Oh no!', err) }
 
-      console.log(`Yay! got latitude and longitude for ${address}`, { lat, lng })
-
-
+      //console.log(`Yay! got latitude and longitude for ${address}`, { lat, lng })
       const newMarker = newMarkerObject({ lat, lng }, address);
 
       this.props.dispatch(addMarker(newMarker));
-
     })
   }
 
@@ -52,8 +49,8 @@ class LocationInput extends Component {
 }
 
 
-const LocationInputWithStateFromRedux = connect(state => ({
+const SearchWithStateFromRedux = connect(state => ({
   state
-}))(LocationInput);
+}))(Search);
 
-export default LocationInputWithStateFromRedux;
+export default SearchWithStateFromRedux;

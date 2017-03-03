@@ -2,7 +2,7 @@
 
 import { take, call, put } from 'redux-saga/effects'
 import { ADD_MARKER, addMarkerAddress } from 'state/actions/actions';
-import { calculateAntipodePosition, newMarkerObject } from 'App/shared/locationUtils';
+import { getAntipodePosition, newMarkerObject } from 'App/shared/locationUtils';
 
 const fetchReverseGeocodeForMarker = async (position) => {
   return new Promise((resolve, reject) => {
@@ -35,7 +35,7 @@ export default function* reverseGeocodingSaga() {
     try {
       [pode, antipode] = yield [
         call(fetchReverseGeocodeForMarker, action.marker.position),
-        call(fetchReverseGeocodeForMarker, calculateAntipodePosition(action.marker.position)),
+        call(fetchReverseGeocodeForMarker, getAntipodePosition(action.marker.position)),
       ];
     } catch (e) {
       // Swallow fetch errors.

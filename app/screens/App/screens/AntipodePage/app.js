@@ -1,13 +1,12 @@
 /* eslint-disable */
 
 import React, { Component } from 'react';
-import Map from './map';
-import AddressDisplay from './addressDisplay';
+import Location from './location';
+import Search from './search';
+import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 import { connect } from 'react-redux';
 import { addMarker } from 'state/actions/actions';
-import { createAntipodeMarkers, calculateAntipodePosition, newMarkerObject } from 'locationUtils';
-
-
+import { createAntipodeMarkers, getAntipodePosition, newMarkerObject } from 'locationUtils';
 
 
 
@@ -15,45 +14,25 @@ import { createAntipodeMarkers, calculateAntipodePosition, newMarkerObject } fro
 class App extends Component {
 
   handlePodeClick = (latlng) => {
-    const newPosition = {
-      lat: latlng.lat,
-      lng: latlng.lng,
-    };
-    const newMarker = newMarkerObject(newPosition);
-
+    const newMarker = newMarkerObject(latlng);
     this.props.dispatch(addMarker(newMarker));
   }
 
 
   handleAntipodeClick = (latlng) => {
-    const newPosition = calculateAntipodePosition(latlng);
-    const newMarker = newMarkerObject(newPosition);
-
+    const newMarker = newMarkerObject(getAntipodePosition(latlng));
     this.props.dispatch(addMarker(newMarker));
   }
 
 
   render() {
-    const {dispatch, state} = this.props;
-
-    const antipodeMarkers = createAntipodeMarkers(state.markers);
-    const antipodeCenter = calculateAntipodePosition(state.center);
-    //console.log(state.center);
-
-    if (!state) {
-    	return null;
-    }
+    const {state} = this.props;
 
     return (
       <div>
-        <div style={{ float:`left`, width:`420px` }}>
-          <Map markers={state.markers} center={state.center} handleClick={this.handlePodeClick}/>
-          <AddressDisplay type="pode"/>
-        </div>
-        <div style={{ float:`left`, width:`420px` }}>
-          <Map markers={antipodeMarkers} center={antipodeCenter} handleClick={this.handleAntipodeClick}/>
-          <AddressDisplay type="antipode"/>
-        </div>
+        <Search />
+        <Location type="pode" markers={state.markers} center={state.center} handleClickApp={this.handlePodeClick}/>
+        <Location type="antipode" markers={createAntipodeMarkers(state.markers)} center={getAntipodePosition(state.center)} handleClickApp={this.handleAntipodeClick}/>
       </div>
     )
   }
@@ -61,8 +40,11 @@ class App extends Component {
 
 
 
+
+
+
 const AppWithStateFromRedux = connect(state => ({
   state
 }))(App);
 
-export default AppWithStateFromRedux;
+export default withScriptjs(AppWithStateFromRedux);

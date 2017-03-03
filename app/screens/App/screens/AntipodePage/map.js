@@ -7,7 +7,7 @@ class Map extends Component {
 
   handleMapLoad = (map) => {
     this._mapComponent = map;
-    if (map) { console.log("zoom",map.getZoom()); }
+    //if (map) { console.log("zoom",map.getZoom()); }
   }
 
   onMapClick = (event) => {
@@ -16,7 +16,7 @@ class Map extends Component {
       lng: event.latLng.lng(),
     }
 
-    this.props.handleClick(latlng);
+    this.props.handleClickLocation(latlng);
   }
 
   render() {
