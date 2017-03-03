@@ -20,66 +20,22 @@ export const getAntipodePosition = podeMarker => {
 
 // create antipode markers array
 export const createAntipodeMarkers = podeMarkers => {
-  //console.log(podeMarkers);
-  return (
-    Object.values(podeMarkers).map(function(marker){
-      const antipodePosition = getAntipodePosition(marker.position);
-      return newMarkerObject(antipodePosition);
-    })
-  )
+  //console.log("podeMarkers",podeMarkers);
+  const newPodeMarkers = {};
+  Object.values(podeMarkers).forEach(function(marker){
+    const antipodePosition = getAntipodePosition(marker.position);
+    newPodeMarkers[marker.key] = newMarkerObject(antipodePosition, marker.key);
+  });
+  return newPodeMarkers;
 }
 
-// const newPodeMarkers;
-// Object
-//   .keys(podeMarkers.markers)
-//   .forEach((key) => {
-//     const entry = podeMarkers[key];
-//     entry.markers.whatever = 'newValue';
-//     newPodeMarkers[key] = entry;
-//   })
-//
-// for (key in podeMarkers) {
-//
-// }
-
-//create antipode markers object
-// export const createAntipodeMarkers = podeMarkers => {
-//
-//   let newAntipodeMarkers;
-//
-//   Object
-//     .keys(podeMarkers)
-//     .forEach((key) => {
-//       //console.log(key);
-//       const antipodePosition = getAntipodePosition(podeMarkers[key].position);
-//       console.log(newMarkerObject(antipodePosition, key));
-//       //return newMarkerObject(antipodePosition);
-//       newAntipodeMarkers[key] = newMarkerObject(antipodePosition);
-//     })
-//
-//   return newAntipodeMarkers;
-//   // return {
-//   //   ...podeMarkers,
-//   //   newMarkerObject(getAntipodePosition(marker.position))
-//   // }
-// }
 
 // create a marker object
-export const newMarkerObject = (position, key= uuid.v4(), address="default name", defaultAnimation=0) => {
-  //const initialKey = uuid.v4();
-
-  // return {
-  //   [key] : {
-  //     position,
-  //     address,
-  //     defaultAnimation,
-  //     key: key
-  //   }
-  // }
-  return {
+export const newMarkerObject = (position, key=uuid.v4(), address="default name", defaultAnimation=0) => (
+  {
     position,
     address,
     defaultAnimation,
-    key: uuid.v4()
+    key
   }
-}
+)

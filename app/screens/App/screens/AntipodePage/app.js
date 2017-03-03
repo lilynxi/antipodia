@@ -32,6 +32,8 @@ class App extends Component {
       <div>
         <Search />
         <Location type="pode" markers={state.markers} center={state.center} handleClickApp={this.handlePodeClick}/>
+        {console.log('markers', state.markers)}
+        {console.log('output', createAntipodeMarkers(state.markers))}
         <Location type="antipode" markers={createAntipodeMarkers(state.markers)} center={getAntipodePosition(state.center)} handleClickApp={this.handleAntipodeClick}/>
       </div>
     )
