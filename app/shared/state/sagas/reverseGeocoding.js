@@ -2,14 +2,15 @@
 
 import { take, call, put } from 'redux-saga/effects'
 import { ADD_MARKER, addMarkerAddress } from 'state/actions/actions';
-import { calculateAntipodePosition } from 'App/shared/locationUtils';
+import { calculateAntipodePosition, newMarkerObject } from 'App/shared/locationUtils';
 
 const fetchReverseGeocodeForMarker = async (position) => {
   return new Promise((resolve, reject) => {
     const geocoder = new google.maps.Geocoder();
 
     geocoder.geocode({ location: position }, (results, status) => {
-      console.log(results, status);
+      //console.log('results',results,'status', status);
+
       if (status && status === google.maps.GeocoderStatus.OK) {
         if (results[1]) {
           resolve(results[1].formatted_address);
@@ -17,7 +18,8 @@ const fetchReverseGeocodeForMarker = async (position) => {
           reject(status);
         }
       } else {
-        reject(status);
+        resolve("No location found");
+        //reject(status);
       }
     });
   });
@@ -38,6 +40,9 @@ export default function* reverseGeocodingSaga() {
     } catch (e) {
       // Swallow fetch errors.
     }
+
+    // const tempMarker = newMarkerObject(action.marker.position);
+    // yield put(addMarker(tempMarker));
 
     yield put(addMarkerAddress(action.marker.key, pode, antipode));
   }
