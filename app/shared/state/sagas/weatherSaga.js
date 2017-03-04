@@ -6,9 +6,6 @@ import { ADD_MARKER, ADD_WEATHERDATA, addWeatherData } from 'state/actions/actio
 import { getAntipodePosition } from 'App/shared/locationUtils';
 
 const getWeatherData = async (position) => {
-  //console.log(position);
-  //return fetch('http://api.openweathermap.org/data/2.5/weather?q=London&APPID=cae5f0d931f0104d163eec25b247f2f1')
-  //return fetch('http://api.openweathermap.org/data/2.5/weather?lat=35&lon=139&APPID=cae5f0d931f0104d163eec25b247f2f1')
   return fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${position.lat}&lon=${position.lng}&APPID=cae5f0d931f0104d163eec25b247f2f1`)
     .then((response) => response.json());
 };
