@@ -36,6 +36,19 @@ class Search extends Component {
     this.onChange = (address) => this.setState({ address })
   }
 
+  handleEnter = () => {
+    const { address } = this.state;
+
+    geocodeByAddress(address,  (err, { lat, lng }) => {
+      if (err) {
+        console.log('Oh no!', err);
+      }
+
+      const newMarker = newMarkerObject({ lat, lng }, address);
+      this.props.dispatch(addMarker(newMarker));
+    })
+  }
+
   handleFormSubmit = (event) => {
     event.preventDefault()
     const { address } = this.state;
@@ -53,10 +66,11 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <Form onSubmit={this.handleFormSubmit}>
+        <Form innerRef={(element) => { this.form = element; }} onSubmit={this.handleFormSubmit}>
           <PlacesAutocomplete
             value={this.state.address}
             onChange={this.onChange}
+            onEnterKeyDown={this.handleEnter}
             placeholder="Enter a place"
           />
           <button type="submit">Get Antipode</button>

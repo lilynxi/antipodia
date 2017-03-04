@@ -7,7 +7,7 @@ const Weather = ({ weather }) => {
 
   return (
     <div>
-      {weather && <span>{tempCeil}°C / {this.props.weather.desc}</span>}
+      {weather && <span>{tempCeil}°C / {weather.desc}</span>}
     </div>
   );
 }
