@@ -18,7 +18,7 @@ const Wrapper = styled.section`
 
 
 const SearchWrapper = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 const LocationWrapper = styled.div`
   display: inline-block;

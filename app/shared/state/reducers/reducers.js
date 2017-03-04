@@ -44,7 +44,7 @@ export default (state = initialState, action) => {
         ...state,
         center: action.marker.position,
         markers: {
-          ...state.markers,
+          // ...state.markers,
           [action.marker.key]: action.marker,
         },
       };
@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         markers: {
-          ...state.markers,
+          // ...state.markers,
           [action.key]: {
             ...state.markers[action.key],
             address: action.address,
@@ -73,7 +73,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         markers: {
-          ...state.markers,
+          // ...state.markers,
           [action.key]: {
             ...state.markers[action.key],
             weather: {

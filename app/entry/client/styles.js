@@ -17,8 +17,8 @@ injectGlobal`
 
 
   @font-face {
-    font-family: 'Arial';
-    font-weight: normal;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: 300;
   }
 
   /*! normalize.min.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
@@ -32,7 +32,9 @@ injectGlobal`
     margin: 0;
     padding: 0;
     font-size: 16px; /* set font size to enable proper rem usage */
-    font-family: 'amag_textlight', sans-serif;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
   }
 
   /**
@@ -49,6 +51,10 @@ injectGlobal`
   img {
     max-width: 100%;
     width: 100%;
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-weight: 300;
   }
 
 

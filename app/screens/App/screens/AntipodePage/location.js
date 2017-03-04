@@ -13,12 +13,15 @@ const WeatherWrapper = styled.section`
   margin-bottom: 1rem;
   font-weight: bold;
   padding-left: 1rem;
+  background: #e12353;
+  color: white;
+  line-height: 3em;
 `;
 
 const DisplayWrapper = styled.section`
   background: #1f2532;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
   padding: 1rem;
 `;
 

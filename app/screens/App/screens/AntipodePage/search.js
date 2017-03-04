@@ -8,11 +8,10 @@ import { addMarker } from 'state/actions/actions';
 import styled from 'styled-components';
 
 const Form = styled.form`
-  background: red;
 
   > div {
     background: blue;
-    width: 80%;
+    width: 70%;
     display: inline-block;
     input {
       width: 100%;
@@ -24,7 +23,7 @@ const Form = styled.form`
   > button {
     background: #e12353;
     color: white;
-    width: 20%;
+    width: 30%;
     display: inline-block;
     border:none;
     padding: .8rem;
@@ -41,7 +40,7 @@ class Search extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { address: 'San Francisco, CA' }
+    this.state = { address: '' }
     this.onChange = (address) => this.setState({ address })
   }
 
@@ -69,9 +68,10 @@ class Search extends Component {
             <PlacesAutocomplete
               value={this.state.address}
               onChange={this.onChange}
+              placeholder="Enter a place"
             />
 
-          <button type="submit">Submit</button>
+          <button type="submit">Get Antipode</button>
         </Form>
       </div>
     )
