@@ -17,6 +17,18 @@ const Wrapper = styled.section`
 
 
 
+const SearchWrapper = styled.div`
+  margin-bottom: 2rem;
+`;
+const LocationWrapper = styled.div`
+  display: inline-block;
+  width: 50%;
+  padding: 1rem;
+  background: white;
+`;
+
+
+
 
 class App extends Component {
 
@@ -42,22 +54,30 @@ class App extends Component {
 
     return (
       <Wrapper>
-        <Search />
-        <Location
-          type="pode"
-          markers={state.markers}
-          center={state.center}
-          address={podeAdress}
-          weather={podeWeather}
-          handleClickApp={this.handlePodeClick}
-        />
-        <Location
-          type="antipode"
-          markers={createAntipodeMarkers(state.markers)}
-          center={getAntipodePosition(state.center)}
-          address={antipodeAdress} weather={antipodeWeather}
-          handleClickApp={this.handleAntipodeClick}
-        />
+        <SearchWrapper>
+          <Search />
+        </SearchWrapper>
+
+        <LocationWrapper>
+          <Location
+            type="pode"
+            markers={state.markers}
+            center={state.center}
+            address={podeAdress}
+            weather={podeWeather}
+            handleClickApp={this.handlePodeClick}
+          />
+        </LocationWrapper>
+
+        <LocationWrapper>
+          <Location
+            type="antipode"
+            markers={createAntipodeMarkers(state.markers)}
+            center={getAntipodePosition(state.center)}
+            address={antipodeAdress} weather={antipodeWeather}
+            handleClickApp={this.handleAntipodeClick}
+          />
+        </LocationWrapper>
       </Wrapper>
     )
   }

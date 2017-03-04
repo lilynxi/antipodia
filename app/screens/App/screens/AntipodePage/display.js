@@ -2,6 +2,16 @@
 
 import React, { Component } from 'react';
 import { getAntipodePosition } from 'locationUtils';
+import styled from 'styled-components';
+
+const WrappedTitle = styled.h3`
+  margin-bottom: -1rem;
+  margin-top: 0;
+`
+const WrappedSubtitle = styled.h5`
+  margin-bottom: 0.2rem;
+`
+
 
 
 class Display extends Component {
@@ -11,8 +21,8 @@ class Display extends Component {
 
     return (
       <div>
-        <div>{ this.props.address }</div>
-        <div>lat: { marker.position.lat } / lng { marker.position.lng }</div>
+        <WrappedTitle>{ this.props.address }</WrappedTitle>
+        <WrappedSubtitle>lat: { marker.position.lat } / lng { marker.position.lng }</WrappedSubtitle>
       </div>
     )
   }

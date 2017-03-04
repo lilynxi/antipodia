@@ -8,12 +8,20 @@ import Image from './image';
 
 import styled from 'styled-components';
 
-const StyledLocation = styled.section`
-  display: inline-block;
-  width: 30rem;
-  padding: 1rem;
-  background-color: #fff;
+
+const WeatherWrapper = styled.section`
+  margin-bottom: 1rem;
+  font-weight: bold;
+  padding-left: 1rem;
 `;
+
+const DisplayWrapper = styled.section`
+  background: #1f2532;
+  color: white;
+  margin-bottom: 1rem;
+  padding: 1rem;
+`;
+
 
 
 class Location extends Component {
@@ -24,12 +32,16 @@ class Location extends Component {
 
   render() {
     return (
-      <StyledLocation>
+      <div>
         <Map markers={this.props.markers} center={this.props.center} handleClickLocation={this.handleClick}/>
-        <Display type={this.props.type} markers={this.props.markers} address={this.props.address} />
-        <Weather weather={this.props.weather}/>
+        <DisplayWrapper>
+          <Display type={this.props.type} markers={this.props.markers} address={this.props.address} />
+        </DisplayWrapper>
+        <WeatherWrapper>
+          <Weather weather={this.props.weather}/>
+        </WeatherWrapper>
         <Image address={this.props.address} />
-      </StyledLocation>
+      </div>
     )
   }
 }

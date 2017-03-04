@@ -21,7 +21,7 @@ class Map extends Component {
 
   render() {
     return (
-      <div style={{ height: `300px`, maxWidth:`400px` }}>
+      <div style={{ height: `150px`, width:`100%` }}>
         <GoogleMapWrapper
           containerElement={<div style={{ height: `100%` }} />}
           mapElement={<div style={{ height: `100%` }} />}

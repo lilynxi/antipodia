@@ -46,5 +46,11 @@ injectGlobal`
   }
 
 
+  img {
+    max-width: 100%;
+    width: 100%;
+  }
+
+
 
 `;

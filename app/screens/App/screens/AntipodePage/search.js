@@ -8,12 +8,27 @@ import { addMarker } from 'state/actions/actions';
 import styled from 'styled-components';
 
 const Form = styled.form`
-  // input {
-  //   background: #fff;
-  //   width: 100%;
-  //   padding: 1rem;
-  //   border: none;
-  // }
+  background: red;
+
+  > div {
+    background: blue;
+    width: 80%;
+    display: inline-block;
+    input {
+      width: 100%;
+      border: none;
+      padding: .8rem;
+    }
+  }
+
+  > button {
+    background: #e12353;
+    color: white;
+    width: 20%;
+    display: inline-block;
+    border:none;
+    padding: .8rem;
+  }
 `
 
 
@@ -50,10 +65,12 @@ class Search extends Component {
     return (
       <div>
         <Form onSubmit={this.handleFormSubmit}>
-          <PlacesAutocomplete
-            value={this.state.address}
-            onChange={this.onChange}
-          />
+
+            <PlacesAutocomplete
+              value={this.state.address}
+              onChange={this.onChange}
+            />
+
           <button type="submit">Submit</button>
         </Form>
       </div>
