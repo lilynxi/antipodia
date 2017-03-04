@@ -9,17 +9,15 @@ import { addMarker } from 'state/actions/actions';
 import { createAntipodeMarkers, getAntipodePosition, newMarkerObject } from 'locationUtils';
 import styled from 'styled-components';
 
-
 const Wrapper = styled.section`
   padding: 1rem;
   background: #eee;
 `;
 
-
-
 const SearchWrapper = styled.div`
   margin-bottom: 1rem;
 `;
+
 const LocationWrapper = styled.div`
   display: inline-block;
   width: 50%;
@@ -27,11 +25,7 @@ const LocationWrapper = styled.div`
   background: white;
 `;
 
-
-
-
 class App extends Component {
-
   handlePodeClick = (latlng) => {
     const newMarker = newMarkerObject(latlng);
     this.props.dispatch(addMarker(newMarker));
@@ -83,10 +77,8 @@ class App extends Component {
   }
 }
 
-
-
 const AppWithStateFromRedux = connect(state => ({
   state
 }))(App);
 
-export default withScriptjs(AppWithStateFromRedux);
+export default __CLIENT__ && withScriptjs(AppWithStateFromRedux) || (() => null);
