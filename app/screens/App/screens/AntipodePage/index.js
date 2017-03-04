@@ -9,7 +9,6 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from '../../../../shared/state/reducers/reducers';
 import rootSaga from 'state/sagas';
 
-// create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [applyMiddleware(sagaMiddleware)];
 
@@ -22,9 +21,6 @@ const store = createStore(
   compose(...middlewares),
 );
 
-
-
-// then run the saga
 sagaMiddleware.run(rootSaga);
 
 const AntipodePage = (): React.Element<any> => (

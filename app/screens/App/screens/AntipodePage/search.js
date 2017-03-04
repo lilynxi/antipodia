@@ -8,7 +8,6 @@ import { addMarker } from 'state/actions/actions';
 import styled from 'styled-components';
 
 const Form = styled.form`
-
   > div {
     background: blue;
     width: 70%;
@@ -30,14 +29,7 @@ const Form = styled.form`
   }
 `
 
-
-
-
-
-
-
 class Search extends Component {
-
   constructor(props) {
     super(props)
     this.state = { address: '' }
@@ -49,35 +41,30 @@ class Search extends Component {
     const { address } = this.state;
 
     geocodeByAddress(address,  (err, { lat, lng }) => {
-      if (err) { console.log('Oh no!', err) }
+      if (err) {
+        console.log('Oh no!', err);
+      }
 
-      //console.log(`Yay! got latitude and longitude for ${address}`, { lat, lng })
       const newMarker = newMarkerObject({ lat, lng }, address);
-
       this.props.dispatch(addMarker(newMarker));
     })
   }
-
-
 
   render() {
     return (
       <div>
         <Form onSubmit={this.handleFormSubmit}>
-
-            <PlacesAutocomplete
-              value={this.state.address}
-              onChange={this.onChange}
-              placeholder="Enter a place"
-            />
-
+          <PlacesAutocomplete
+            value={this.state.address}
+            onChange={this.onChange}
+            placeholder="Enter a place"
+          />
           <button type="submit">Get Antipode</button>
         </Form>
       </div>
     )
   }
 }
-
 
 const SearchWithStateFromRedux = connect(state => ({
   state

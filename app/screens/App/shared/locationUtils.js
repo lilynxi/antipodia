@@ -28,7 +28,6 @@ export const createAntipodeMarkers = podeMarkers => {
   return newPodeMarkers;
 }
 
-
 // create a marker object
 export const newMarkerObject = (position, key=uuid.v4(), address="default name", weather={ pode: undefined, antipode: undefined }, defaultAnimation=0) => (
   {
