@@ -15,18 +15,16 @@ const Wrapper = styled.section`
   background: #eee;
 `;
 
-
-
 const SearchWrapper = styled.div`
   margin-bottom: 1rem;
 `;
+
 const LocationWrapper = styled.div`
   display: inline-block;
   width: 50%;
   padding: 1rem;
   background: white;
 `;
-
 
 
 

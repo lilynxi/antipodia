@@ -32,10 +32,6 @@ const Form = styled.form`
 
 
 
-
-
-
-
 class Search extends Component {
 
   constructor(props) {
