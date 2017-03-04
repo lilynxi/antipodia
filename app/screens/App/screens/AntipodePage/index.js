@@ -9,20 +9,18 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from '../../../../shared/state/reducers/reducers';
 import rootSaga from 'state/sagas';
 
-// create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
+const middlewares = [applyMiddleware(sagaMiddleware)];
+
+if (__DEVELOPMENT__) {
+  middlewares.push(global.__REDUX_DEVTOOLS_EXTENSION__ && global.__REDUX_DEVTOOLS_EXTENSION__());
+}
 
 const store = createStore(
   reducers,
-  compose(
-    applyMiddleware(sagaMiddleware),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  ),
+  compose(...middlewares),
 );
 
-
-
-// then run the saga
 sagaMiddleware.run(rootSaga);
 
 const AntipodePage = (): React.Element<any> => (

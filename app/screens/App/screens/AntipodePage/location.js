@@ -8,7 +8,6 @@ import Image from './image';
 
 import styled from 'styled-components';
 
-
 const WeatherWrapper = styled.section`
   margin-bottom: 1rem;
   font-weight: bold;
@@ -25,10 +24,7 @@ const DisplayWrapper = styled.section`
   padding: 1rem;
 `;
 
-
-
 class Location extends Component {
-
   handleClick = (latlng) => {
     this.props.handleClickApp(latlng);
   }

@@ -3,8 +3,22 @@
 import React, { Component } from 'react';
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 
-class Map extends Component {
+const GoogleMapWrapper = withGoogleMap ( props =>  (
+  <GoogleMap
+    ref={props.onMapLoad}
+    defaultZoom={3}
+    center={props.center}
+    onClick={props.onMapClick}
+  >
+  {Object.values(props.markers).map(marker => (
+    <Marker
+      {...marker}
+    />
+  ))}
+  </GoogleMap>
+));
 
+class Map extends Component {
   handleMapLoad = (map) => {
     this._mapComponent = map;
     //if (map) { console.log("zoom",map.getZoom()); }
@@ -35,22 +49,4 @@ class Map extends Component {
   }
 }
 
-
 export default Map;
-
-
-
-const GoogleMapWrapper = withGoogleMap ( props =>  (
-  <GoogleMap
-    ref={props.onMapLoad}
-    defaultZoom={3}
-    center={props.center}
-    onClick={props.onMapClick}
-  >
-  {Object.values(props.markers).map(marker => (
-    <Marker
-      {...marker}
-    />
-  ))}
-  </GoogleMap>
-));

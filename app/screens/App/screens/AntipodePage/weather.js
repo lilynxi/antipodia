@@ -2,23 +2,14 @@
 
 import React, { Component } from 'react';
 
+const Weather = ({ weather }) => {
+  const tempCeil = weather && Math.ceil(weather.temp);
 
-class Weather extends Component {
-
-  render() {
-    if(this.props.weather){
-      var tempCeil = Math.ceil(this.props.weather.temp);
-    }
-
-    return (
-      <div>
-        { this.props.weather &&
-          <span>{tempCeil}°C / {this.props.weather.desc}</span>
-        }
-      </div>
-    )
-  }
+  return (
+    <div>
+      {weather && <span>{tempCeil}°C / {weather.desc}</span>}
+    </div>
+  );
 }
-
 
 export default Weather;
