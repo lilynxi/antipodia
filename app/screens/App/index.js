@@ -12,8 +12,8 @@ const App = ({
 }: AppProps): React.Element<any> => (
   <div>
     <Helmet
-      titleTemplate="Antipode - %s"
-      defaultTitle="Antipode"
+      titleTemplate="Antipodia - %s"
+      defaultTitle="Antipodia"
     />
     {children}
   </div>

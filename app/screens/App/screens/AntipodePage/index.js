@@ -27,7 +27,7 @@ sagaMiddleware.run(rootSaga);
 
 const AntipodePage = (): React.Element<any> => (
   <div>
-    <Helmet title="Hello world!" />
+    <Helmet title="" />
     <Provider store={store}>
       <App
         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo9HjDmEGGRE3nOk-fWwP2YmpfF-JcWqM&libraries=places"
