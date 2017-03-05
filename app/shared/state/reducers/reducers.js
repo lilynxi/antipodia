@@ -66,8 +66,8 @@ export default (state = initialState, action) => {
     //console.log(action.weather.pode.weather[0].description);
     // T(°C) = (T(°F) - 32) / 1.8
     // const podeWeatherDesc = action.weather.pode.weather[0].description;
-    const podeWeather = action.weather.pode.main.temp - 273.15;
-    const antipodeWeather = action.weather.antipode.main.temp - 273.15;
+    const podeWeather = action.weather.pode && action.weather.pode.main && action.weather.pode.main.temp - 273.15;
+    const antipodeWeather = action.weather.antipode && action.weather.antipode.main && action.weather.antipode.main.temp - 273.15;
     //console.log(podeWeather);
     // console.log(antipodeWeather);
       return {
