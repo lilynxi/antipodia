@@ -12,9 +12,9 @@ import rootSaga from 'state/sagas';
 const sagaMiddleware = createSagaMiddleware();
 const middlewares = [applyMiddleware(sagaMiddleware)];
 
-if (__DEVELOPMENT__) {
-  middlewares.push(global.__REDUX_DEVTOOLS_EXTENSION__ && global.__REDUX_DEVTOOLS_EXTENSION__());
-}
+// if (__DEVELOPMENT__) {
+//   middlewares.push(global.__REDUX_DEVTOOLS_EXTENSION__ && global.__REDUX_DEVTOOLS_EXTENSION__());
+// }
 
 const store = createStore(
   reducers,
