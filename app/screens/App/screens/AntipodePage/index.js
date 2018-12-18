@@ -28,7 +28,9 @@ const AntipodePage = (): React.Element<any> => (
     <Helmet title="" />
     <Provider store={store}>
       <App
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo9HjDmEGGRE3nOk-fWwP2YmpfF-JcWqM&libraries=places"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGQXIUdvl7fkKKqt-njiiY9AygNSM9P0E&libraries=places"
+        // orig. api key
+        //googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyCo9HjDmEGGRE3nOk-fWwP2YmpfF-JcWqM&libraries=places"
         loadingElement={<div>Loading</div>}
       />
     </Provider>
